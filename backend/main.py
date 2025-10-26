@@ -5,22 +5,32 @@ from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# @app.get("/")
-# async def example():
-#     return {"message":"Hello world"}
+origins = [
+    "http://localhost:3000",
+]
 
-@app.get("/tasks")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/api/todos")
 async def get_all():
     return taskList.get_task()
 
-@app.post("/tasks")
-async def create(task_create=Body()):
+@app.post("/api/todos")
+async def create(task_create: dict = Body(...)):
     return taskList.create(task_create)
 
-@app.patch("/tasks/{task_id}")
-async def update(task_id:int,completed=Body()):
-    return taskList.patch(id,completed)
+@app.patch("/api/todos/{task_id}") 
+async def update(task_id: int, completed_data: dict = Body(...)):
+    return taskList.patch(task_id, completed_data.get("completed"))
 
-@app.delete("tasks/{task_id}")
+
+@app.delete("/api/todos/{task_id}")
 async def delete(task_id:int):
     return taskList.delete(task_id)
