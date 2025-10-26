@@ -2,7 +2,7 @@ import './App.css';
 
 import { useState, useEffect } from "react"; 
 
-const API_URL = "http://localhost:8000/api/todos"; // APIエンドポイントはサーバー設定に合わせるため、ここでは変更しない
+const API_URL = "http://localhost:8000/api/todos";
 
 const Example = () => {
   return (
@@ -23,11 +23,10 @@ const TaskApp = () => {
     { id: 3, title: "シフト表出す", completed: false },
   ];
   
-  const [tasks, setTasks] = useState(initialTasksList); // todos -> tasks, setTodos -> setTasks
-
+  const [tasks, setTasks] = useState(initialTasksList); 
   //データ取得
   useEffect(() => {
-    fetchTasks(); // fetchTodos -> fetchTasks
+    fetchTasks();
   }, []); 
 
   const fetchTasks = async () => {
@@ -38,7 +37,7 @@ const TaskApp = () => {
         return; 
       }
       const data = await response.json();
-      setTasks(data); // setTodos -> setTasks
+      setTasks(data);
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -99,13 +98,13 @@ const TaskApp = () => {
 
       if (!response.ok) {
         console.error("タスクの追加失敗");
-        const fallbackTask = { ...task, id: Date.now() }; // fallbackTodo -> fallbackTask, todo -> task
-        setTasks(prevTasks => [...prevTasks, fallbackTask]); // setTodos -> setTasks, prevTodos -> prevTasks
+        const fallbackTask = { ...task, id: Date.now() };
+        setTasks(prevTasks => [...prevTasks, fallbackTask]);
         return;
       }
 
-      const newTaskFromServer = await response.json(); // newTodoFromServer -> newTaskFromServer
-      setTasks(prevTasks => [...prevTasks, newTaskFromServer]); // setTodos -> setTasks, prevTodos -> prevTasks
+      const newTaskFromServer = await response.json();
+      setTasks(prevTasks => [...prevTasks, newTaskFromServer]);
       
     } catch (error) {
       console.error("Create error:", error);
@@ -130,11 +129,11 @@ const TaskList=({tasks, deleteTask, toggleTaskStatus})=>{
       {tasks.map(task=>{
         return(
           <div key={task.id}>
-            <button onClick={()=>toggleTaskStatus(task.id)}>{task.completed? "完了":"未完了"}</button> {/* toggleTodoStatus -> toggleTaskStatus, todo -> task */}
-            <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}> {/* todo -> task */}
+            <button onClick={()=>toggleTaskStatus(task.id)}>{task.completed? "完了":"未完了"}</button>
+            <span style={{ textDecoration: task.completed ? 'line-through' : 'none' }}>
               {task.title}
             </span>
-            <button onClick={()=>deleted(task.id)}>削除</button> {/* todo -> task */}
+            <button onClick={()=>deleted(task.id)}>削除</button>
           </div>
         )
       })}
@@ -144,7 +143,7 @@ const TaskList=({tasks, deleteTask, toggleTaskStatus})=>{
 
 
 const TaskForm=({createTask})=>{
-  const [enteredTask, setEnteredTask] = useState(""); // enterdTodo -> enteredTask, setEnterdTodo -> setEnteredTask
+  const [enteredTask, setEnteredTask] = useState("");
   const addTask=async (e)=>{
     e.preventDefault();
 
