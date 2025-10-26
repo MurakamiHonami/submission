@@ -1,0 +1,15 @@
+button{
+  background-color: #61dafb;
+  border: none;
+  outline:none;
+  box-shadow: 2px 2px 4px gray;
+  margin: 5px;
+}
+h2{
+  font-size: 40px;
+  text-shadow: 6px 6px 10px gray;
+}
+div{
+  padding: 10px;
+  text-align: center;
+}
