@@ -1,3 +1,10 @@
+body{
+  background-image: url("../public/jisaku_illust.JPG");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
 button{
   background-color: #61dafb;
   border: none;
@@ -6,8 +13,10 @@ button{
   margin: 5px;
 }
 h2{
+  font-family: YuGothic,'Yu Gothic',sans-serif;
   font-size: 40px;
-  text-shadow: 6px 6px 10px gray;
+  text-shadow: 5px 5px 10px white;
+  color: black;
 }
 div{
   padding: 10px;
